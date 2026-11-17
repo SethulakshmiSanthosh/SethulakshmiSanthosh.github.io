@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sethulakshmi Santhosh — Product Analytics &amp; Data Science</title>
+<meta name="description" content="Senior Business Analyst in Product Analytics at Flipkart (Shopsy), moving toward data science. Search quality, experimentation and instrumentation work.">
+<meta name="author" content="Sethulakshmi Santhosh">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sethulakshmi Santhosh">
+<meta property="og:description" content="Product analytics and data science — search quality, experimentation and instrumentation.">
+<meta property="og:image" content="photo.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#090C14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23090C14%27/%3E%3Ctext x=%2716%27 y=%2722%27 font-family=%27Georgia,serif%27 font-size=%2717%27 fill=%27%2393A0FF%27 text-anchor=%27middle%27%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: a night-time data studio. One deliberate dark world; a living scatter plot behind
+   the hero, a portrait in an arch, a playable experiment, and a gallery of tilting plates. */
+:root{
+  color-scheme:dark;
+  --bg:#090C14; --fg:#EEEAE2; --muted:#9499A8; --line:#232838; --card:#10141F; --plate:#141A28;
+  --a:#93A0FF; --b:#FFB07C; --accent:var(--a); --other:var(--b); --on-accent:#090C14; --veil:rgba(3,5,10,.72);
+  --display:"Instrument Serif","Iowan Old Style",Georgia,serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+:root[data-variant="b"]{--accent:var(--b);--other:var(--a)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16.5px;line-height:1.65;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:4px;text-decoration-thickness:1px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+::selection{background:var(--accent);color:var(--on-accent)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.012em}
+.acc{color:var(--accent);transition:color .6s}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* chrome */
+#bar{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:30;transition:background .6s}
+#cur{position:fixed;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--fg);mix-blend-mode:difference;pointer-events:none;z-index:99;
+  display:none;place-items:center;font:500 .62rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:transparent;transition:width .25s,height .25s,margin .25s,color .2s}
+#cur.on{display:grid}
+#cur.big{width:84px;height:84px;margin:-42px 0 0 -42px;color:#000}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-size:1.3rem;text-decoration:none}
+.links{display:flex;gap:30px}
+.links a{text-decoration:none;font-size:.86rem;font-weight:500;color:var(--muted);transition:color .2s}
+.links a:hover{color:var(--fg)}
+.ab{display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px}
+.ab button{background:none;border:0;cursor:pointer;font:500 .72rem var(--mono);letter-spacing:.08em;padding:5px 12px;border-radius:999px;color:var(--muted);transition:background .3s,color .3s}
+.ab button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+@media (max-width:720px){.links{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+#field{position:absolute;inset:0;width:100%;height:100%;display:block}
+.heroin{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,110px) clamp(44px,6vw,80px)}
+h1{font-size:clamp(3rem,8.6vw,7.6rem);line-height:.95;margin-block:22px 30px}
+h1 .w{display:inline-block;transition:transform .5s cubic-bezier(.2,.7,.2,1),color .3s}
+h1 .w:hover{transform:translateY(-8px) rotate(-2deg);color:var(--accent)}
+h1 em{font-style:italic}
+.lede{font-size:clamp(1.02rem,1.4vw,1.16rem);max-width:33em;margin:0;color:var(--muted)}
+.lede b{color:var(--fg);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn{display:inline-block;text-decoration:none;font-size:.9rem;font-weight:600;padding:14px 26px;border-radius:999px;border:1px solid var(--fg);background:none;cursor:pointer;transition:background .3s,color .3s,border-color .3s;will-change:transform}
+.btn.fill{background:var(--fg);color:var(--bg)}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.hint{margin-top:26px;display:block}
+.portrait{position:relative;perspective:900px;justify-self:end;width:100%;max-width:360px}
+.frame{aspect-ratio:4/5;max-width:100%;border-radius:999px 999px 14px 14px;overflow:hidden;border:1px solid var(--line);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;box-shadow:0 40px 90px -40px color-mix(in srgb,var(--accent) 55%,transparent)}
+.frame img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;display:block;transform:scale(1.06)}
+.tag{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:500 .68rem var(--mono);letter-spacing:.08em;white-space:nowrap;transform:translate(var(--tx,0),var(--ty,0));transition:transform .3s ease-out}
+.tag i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;transition:background .6s}
+.tag.t1{left:-18px;top:22%}.tag.t2{right:-10px;bottom:16%}
+@media (max-width:860px){.heroin{grid-template-columns:1fr}.portrait{justify-self:start;max-width:250px;order:-1}.tag.t1{left:auto;right:-30px}.tag.t2{right:-40px}}
+
+/* figures */
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.fig{padding:28px 22px 26px 0;transition:background .3s}
+.fig+.fig{padding-left:22px;border-left:1px solid var(--line)}
+.fig b{font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,4.6vw,3.9rem);line-height:1;display:block;font-variant-numeric:lining-nums tabular-nums;transition:color .3s}
+.fig:hover b{color:var(--accent)}
+.fig span{display:block;margin-top:10px;font-size:.86rem;color:var(--muted);max-width:18em;line-height:1.5}
+@media (max-width:760px){.figs{grid-template-columns:repeat(2,minmax(0,1fr))}.fig{padding:22px 14px 22px 0}.fig:nth-child(3){padding-left:0;border-left:0}.fig:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* sections */
+section{padding-block:clamp(72px,10vw,140px) 0}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:36px}
+h2{font-size:clamp(2.4rem,5.6vw,4.6rem);line-height:1;margin-top:12px}
+h2 em{font-style:italic;color:var(--accent);transition:color .6s}
+.head p{margin:0;color:var(--muted);max-width:30em;font-size:.95rem}
+
+/* experiment */
+.lab{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0;border:1px solid var(--line);border-radius:6px;background:var(--card);overflow:hidden}
+.lab>div{padding:clamp(22px,3.4vw,40px);min-width:0}
+.lab .ctl{border-right:1px solid var(--line);display:flex;flex-direction:column;gap:20px}
+.lab label{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--muted)}
+.lab label b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
+.verdict{font-family:var(--display);font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.08;margin-top:auto;min-height:2.2em;transition:color .4s}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:26px}
+.readout b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1;font-variant-numeric:tabular-nums}
+#ci{width:100%;height:auto;display:block}
+.ci-axis{stroke:var(--line);stroke-width:1}.ci-zero{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.ci-bar{stroke:var(--accent);stroke-width:6;stroke-linecap:round;transition:stroke .4s}.ci-dot{fill:var(--fg)}
+.ci-txt{fill:var(--muted);font:500 10px var(--mono);letter-spacing:.08em}
+@media (max-width:820px){.lab{grid-template-columns:1fr}.lab .ctl{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* gallery */
+.tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;font-size:.82rem;font-weight:500;color:var(--muted);transition:all .25s}
+.filters button:hover{color:var(--fg);border-color:var(--muted)}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;transition:all .25s}
+.arrows button:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;padding-block:14px 30px;scrollbar-width:none;cursor:grab;perspective:1400px;
+  padding-left:max(22px,env(safe-area-inset-left,0px),calc((100% - 1156px)/2));padding-right:max(22px,env(safe-area-inset-right,0px),calc((100% - 1156px)/2))}
+.rail::-webkit-scrollbar{display:none}
+.rail.drag{cursor:grabbing;scroll-snap-type:none}
+.plate{position:relative;flex:0 0 min(320px,78vw);scroll-snap-align:center;min-height:420px;display:flex;flex-direction:column;text-align:left;cursor:pointer;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;user-select:none;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--up,0));transition:transform .3s ease-out,border-color .3s}
+.plate::before{content:"";position:absolute;inset:0;background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--accent) 26%,transparent),transparent 65%);opacity:0;transition:opacity .35s}
+.plate:hover{--up:-8px;border-color:color-mix(in srgb,var(--accent) 60%,var(--line))}
+.plate:hover::before{opacity:1}
+.plate>*{position:relative}
+.plate .top{display:flex;justify-content:flex-end;gap:10px}
+.plate .num{font-family:var(--display);font-size:1.1rem;color:var(--muted)}
+.plate .ghost{font-family:var(--display);font-size:5.4rem;line-height:1;margin-top:26px;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--muted) 60%,var(--line));white-space:nowrap;transition:all .4s}
+.plate:hover .ghost{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.plate h3{font-size:1.7rem;line-height:1.08;margin-top:auto;padding-top:30px}
+.plate .cap{margin-top:12px;font-size:.82rem;color:var(--muted);line-height:1.45}
+.plate .open{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:.78rem;font-weight:600;display:flex;justify-content:space-between;color:var(--muted)}
+.plate:hover .open{color:var(--fg)}
+
+/* detail sheet */
+dialog{border:1px solid var(--line);padding:0;background:var(--card);color:var(--fg);width:min(960px,calc(100% - 28px));max-height:min(88vh,760px);border-radius:10px;overflow:hidden}
+dialog::backdrop{background:var(--veil);backdrop-filter:blur(10px)}
+dialog[open]{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);animation:rise .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}}
+.side{background:radial-gradient(120% 90% at 0% 100%,color-mix(in srgb,var(--accent) 30%,transparent),transparent 70%),var(--plate);padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-width:0}
+.side .big{font-family:var(--display);font-size:clamp(3.6rem,9vw,6.6rem);line-height:.9;color:var(--accent)}
+.side .cap{font-size:.9rem;color:var(--muted);margin-top:12px;max-width:16em}
+.sheet{padding:30px 32px 26px;overflow-y:auto;min-width:0;display:flex;flex-direction:column;gap:18px}
+.sheet h3{font-size:clamp(1.8rem,3.4vw,2.5rem);line-height:1.05;padding-right:60px}
+.sheet p{margin:0;color:var(--muted)}
+.sheet ul{margin:0;padding-left:18px;color:var(--muted)}
+.sheet li{margin-bottom:6px}.sheet li::marker{color:var(--accent)}
+.sheet>a{align-self:flex-start;font-weight:600;font-size:.92rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--mono);font-size:.68rem;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted)}
+.sheetfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.sheetfoot button,.x{background:none;border:0;cursor:pointer;font-size:.84rem;font-weight:600;padding:4px 0}
+.sheetfoot button:hover,.x:hover{color:var(--accent)}
+.x{position:absolute;top:18px;right:22px;font:500 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:720px){dialog[open]{grid-template-columns:1fr;overflow-y:auto}.side{padding:26px 22px 22px}.sheet{padding:22px;overflow:visible}.side .big{font-size:3.6rem}}
+
+/* marquee */
+.mq{overflow:hidden;padding-block:8px;border-block:1px solid var(--line);margin-top:clamp(72px,10vw,140px)}
+.mq div{display:flex;gap:44px;width:max-content;font-family:var(--display);font-size:clamp(2.4rem,6vw,5rem);line-height:1.25;white-space:nowrap;animation:mq 46s linear infinite}
+.mq div.r{animation-direction:reverse}
+.mq:hover div{animation-play-state:paused}
+.mq span:nth-child(odd){color:transparent;-webkit-text-stroke:1px var(--muted)}
+.mq span:nth-child(even){font-style:italic;color:var(--accent);transition:color .6s}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* story */
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,90px);align-items:start}
+.story .big{font-family:var(--display);font-size:clamp(1.7rem,3.2vw,2.7rem);line-height:1.18;margin:0}
+.story p{max-width:36em;margin:0 0 16px;color:var(--muted)}
+.path{list-style:none;padding:0;margin:30px 0 0;border-top:1px solid var(--line)}
+.path li{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);gap:16px;padding:15px 10px;border-bottom:1px solid var(--line);font-size:.94rem;transition:background .3s,padding .3s}
+.path li:hover{background:var(--card);padding-left:20px}
+.path span:last-child{color:var(--muted)}.path b{font-weight:500;color:var(--fg)}
+.out{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}.out>.label{display:block;margin-bottom:16px}.out ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px}.out li{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--muted)}.out li i{flex:0 0 auto;width:7px;height:7px;margin-top:.55em;border-radius:50%;background:var(--accent);opacity:.75}.out li b{color:var(--fg);font-weight:500}
+@media (max-width:820px){.story{grid-template-columns:1fr}.path li{grid-template-columns:1fr;gap:2px}}
+
+/* contact */
+.contact{padding-block:clamp(80px,12vw,160px) 34px;text-align:center}
+.contact h2{font-size:clamp(3.4rem,12vw,10rem);line-height:.92}
+.mail{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 20px;margin-top:40px;font-size:clamp(1rem,2vw,1.3rem)}
+.mail span{user-select:all;overflow-wrap:anywhere;min-width:0}
+.social{display:flex;flex-wrap:wrap;justify-content:center;gap:26px;margin-top:22px;font-size:.92rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:90px;padding-top:18px;border-top:1px solid var(--line);text-align:left}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.mq div{animation:none}.plate,.frame,.tag{transition:none;transform:none}dialog[open]{animation:none}}
+</style>
+</head>
+<body>
+
+<div id="bar"></div><div id="cur" aria-hidden="true"></div>
+
+<header><div class="wrap"><div class="nav">
+  <a class="brand" href="#top">Sethulakshmi Santhosh</a>
+  <nav class="links" aria-label="Sections"><a href="#lab">Experiment</a><a href="#work">Work</a><a href="#story">Story</a><a href="#contact">Contact</a></nav>
+  <div class="ab" role="group" aria-label="Page variant"><button id="varA" type="button" aria-pressed="true">A</button><button id="varB" type="button" aria-pressed="false">B</button></div>
+</div></div></header>
+
+<main id="top">
+<div class="hero" id="hero">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap heroin">
+    <div>
+      <span class="label" id="assign">Variant A · the analyst</span>
+      <h1 id="h1" data-a="Turning product data into |decisions." data-b="Asking why the number |moved.">Turning product data into decisions.</h1>
+      <p class="lede" data-a="&lt;b&gt;Senior Business Analyst, Product Analytics at Flipkart (Shopsy).&lt;/b&gt; Three years of experiments, metrics and search analytics on a high-traffic consumer app in Bengaluru, now moving toward data science."
+         data-b="I'm &lt;b&gt;Sethulakshmi&lt;/b&gt;. I work on product analytics at Flipkart's Shopsy in Bengaluru, finding out what changed, why, and whether to trust it. This page is a small A/B test, and you are reading the second variant."></p>
+      <div class="cta"><a class="btn fill mag" href="#work">See the work</a><a class="btn mag" href="#lab">Run an experiment</a></div>
+      <span class="label hint">Move your cursor through the dots · press A or B to regroup them</span>
+    </div>
+    <div class="portrait" id="portrait">
+      <div class="frame"><img src="photo.webp" alt="Portrait of Sethulakshmi Santhosh" width="800" height="800"></div>
+      <span class="tag t1"><i></i>Bengaluru, India</span>
+      <span class="tag t2"><i></i>p &lt; 0.05</span>
+    </div>
+  </div>
+</div>
+
+<section id="lab"><div class="wrap">
+  <div class="head rv"><div><span class="label">Try my job · a simulation</span><h2>Would you <em>ship it?</em></h2></div>
+    <p>A new feature really does lift conversion from 10% to 10.8%. Whether you can prove it depends on how many users you test. Drag the slider and decide.</p></div>
+  <div class="lab rv">
+    <div class="ctl">
+      <div><label for="n">Users in each group <b id="nOut"></b></label><input id="n" type="range" min="0" max="1000" value="330" data-cur="Drag"></div>
+      <div class="label">Control 10.0% · Variant 10.8% · true lift +8%</div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+    <div>
+      <div class="readout">
+        <div><span class="label">Measured lift</span><b>+8.0%</b></div>
+        <div><span class="label">95% interval</span><b id="ciOut"></b></div>
+        <div><span class="label">p-value</span><b id="pOut"></b></div>
+      </div>
+      <svg id="ci" viewBox="0 0 520 110" role="img" aria-label="Confidence interval for the lift">
+        <line class="ci-axis" x1="10" y1="60" x2="510" y2="60"/><line class="ci-zero" id="zero" y1="20" y2="86"/>
+        <line class="ci-bar" id="ciBar" y1="60" y2="60"/><circle class="ci-dot" id="ciDot" cy="60" r="6"/>
+        <text class="ci-txt" id="zeroT" y="102" text-anchor="middle">NO EFFECT</text><text class="ci-txt" x="510" y="102" text-anchor="end">LIFT →</text>
+      </svg>
+    </div>
+  </div>
+</div></section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="head rv"><div><span class="label">Selected work</span><h2>Pick a piece, <em>open the story.</em></h2></div>
+      <p>Work from Flipkart, my own projects and published research. Drag the row and select a piece to see what it was and what it achieved.</p></div>
+    <div class="tools rv"><div class="filters" id="filters" role="group" aria-label="Filter work"></div>
+      <div class="arrows"><button id="prev" type="button" aria-label="Scroll back">←</button><button id="next" type="button" aria-label="Scroll forward">→</button></div></div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Work gallery"></div>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mq1"></div><div class="r" id="mq2"></div></div>
+
+<section id="story"><div class="wrap">
+  <div class="head rv"><div><span class="label">Story</span><h2>The person <em>behind the numbers.</em></h2></div></div>
+  <div class="story">
+    <p class="big rv">What I like most is the moment a messy question becomes a clear answer someone can act on.</p>
+    <div class="rv">
+      <p>I studied Computer Science at Amrita School of Engineering and graduated in 2024. Along the way I published machine learning research, including a paper as first author.</p>
+      <p>I spent my final semester at BNP Paribas as a software engineering intern, then joined Flipkart's Shopsy as a Business Analyst in Product Analytics. Two years later I was promoted to Senior Business Analyst. Next, I want to do more of the modelling myself, which is why I'm moving toward data science.</p>
+      <ul class="path">
+        <li><span class="label">Sep 2026 to now</span><span><b>Senior Business Analyst, Product Analytics</b> · Flipkart (Shopsy)</span></li>
+        <li><span class="label">Jul 2024 to Sep 2026</span><span><b>Business Analyst, Product Analytics</b> · Flipkart (Shopsy)</span></li>
+        <li><span class="label">Jan to Jun 2024</span><span><b>Software Development Engineer Intern</b> · BNP Paribas</span></li>
+        <li><span class="label">2024</span><span><b>B.Tech, Computer Science and Engineering</b> · Amrita School of Engineering, Amritapuri · CGPA 9.2</span></li>
+      </ul>
+      <div class="out"><span class="label">Outside work</span><ul><li><i></i><span><b>Drawing.</b> The one I make real time for.</span></li><li><i></i><span><b>Fiction.</b> And writing my own thoughts down.</span></li><li><i></i><span><b>Singing.</b> Dancing now and then, badly and happily.</span></li><li><i></i><span><b>Cooking, and the gym.</b> Both more fun than they sound.</span></li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <span class="label">Contact</span>
+  <h2 class="rv">Let's <em>talk.</em></h2>
+  <div class="mail"><span id="email">sethulakshmisanthosh2002@gmail.com</span><button class="btn mag" id="copy" type="button">Copy email</button></div>
+  <div class="social"><a href="https://www.linkedin.com/in/sethulakshmi-santhosh-ba1b39212/">LinkedIn ↗</a><a href="https://github.com/SethulakshmiSanthosh">GitHub ↗</a></div>
+  <div class="foot label"><span>Sethulakshmi Santhosh · Bengaluru, India</span><span>n = 1 visitor · result pending your reply</span></div>
+</div></section>
+</main>
+
+<dialog id="sheet" aria-labelledby="dTitle">
+  <div class="side"><span class="label" id="dCat"></span><div><div class="big" id="dBig"></div><div class="cap" id="dCap"></div></div><span class="label" id="dNum"></span></div>
+  <div class="sheet">
+    <span class="label" id="dWhere"></span>
+    <h3 id="dTitle"></h3>
+    <p id="dSum"></p>
+    <ul id="dPts"></ul>
+    <div class="chips" id="dTools"></div>
+    <a id="dLink" target="_blank" rel="noopener"></a>
+    <div class="sheetfoot"><button id="dPrev" type="button">← Previous</button><button id="dNext" type="button">Next →</button></div>
+  </div>
+  <button class="x" id="dClose" type="button">Close</button>
+</dialog>
+
+<script>
+(function(){
+  var F='Flipkart (Shopsy) · 2024 to now';
+  var W=[
+   {id:'experiments',cat:'Experimentation',where:F,t:'Experimentation framework and A/B readouts',big:'+8%',cap:'platform conversion, across the experiments together',
+    sum:'A repeatable way to run and read A/B tests, so product managers can make ship, iterate or kill calls without waiting on an analyst.',
+    pts:['Automated sample-ratio, covariate-balance and significance checks.','Validated the personalised search ranker over three rounds and evaluated two personalisation tests.','Measured a cash-on-delivery fee change across checkout, payment and order-summary funnels.'],
+    tools:['Statsig','Hypothesis testing','Guardrail metrics','SRM']},
+   {id:'anomalies',cat:'Search',where:F,t:'Anomaly detection for search',big:'~25%',cap:'lift in successful-search rate it contributed to',
+    sum:'A weekly framework that finds search queries whose success rate is falling and says why.',
+    pts:['Flags queries with declining successful-search rates.','Classifies the cause of each decline.','Helped Product and Engineering decide which fixes to do first.'],tools:['SQL','Python']},
+   {id:'root-cause',cat:'Analytics',where:F,t:'Root-cause app for metric movements',big:'~60%',cap:'less time spent on each analysis',
+    sum:'A self-serve app that explains why an engagement metric, such as page views per visit, moved.',
+    pts:['Splits any movement into rate and mix-shift drivers.','Covers search, feed, merchandising and recommendations.','Funnel and cohort drill-downs for the detail.'],
+    tools:['LMDI decomposition','Mix shift','Funnel analysis','Cohort analysis']},
+   {id:'relevance',cat:'Search',where:F,t:'Shopsy’s first search relevance metric',big:'+5%',cap:'relevance gain it drove',
+    sum:'The first measure of how relevant Shopsy’s search results are, defined from scratch.',
+    pts:['Built over 10,000+ queries with LLM-assisted labelling.','Validated against successful-search rate and MRR.','Now run weekly by Product Ops.'],tools:['NDCG','MRR','LLM-assisted labelling']},
+   {id:'slate',cat:'Search',where:F,t:'Search slate analyzer',big:'+17%',cap:'improvement in successful-search rate',
+    sum:'A tool that pulls the live search results for the same query from Shopsy and competing apps, puts the two result sets side by side, and joins them with conversion data.',
+    pts:['Fetches results for one query across Shopsy 1.0, Shopsy 2.0, Flipkart and Meesho, and lines them up slot by slot.',
+         'Compares the two result sets on price, rating, click-through and units per impression, share of ads against organic results, new-selection share, out-of-stock and minimum-order-quantity share.',
+         'Marks every product as new, moved or dropped between the test and control result sets, with how far it moved.',
+         'A batch mode runs a list of queries and logs each query-and-slot comparison, so a merchandising or relevance change can be read across hundreds of queries instead of one.',
+         'Built it end to end, from the data fetching to the web interface analysts actually used.'],tools:['Python','Flask','Web scraping','pandas']},
+   {id:'autosuggest',cat:'Search',where:F,t:'Autosuggest analyzer',big:'+18%',cap:'increase in autosuggest adoption',
+    sum:'A simulator that grades the search suggestions Shopsy shows against the ones competitors show, for the same typed query.',
+    pts:['Fetches live suggestions for a query from Shopsy 2.0, Shopsy 1.0, Flipkart and Amazon in parallel, and streams the results in as they arrive.',
+         'Has an LLM judge each of the top suggestions as relevant, partly relevant or irrelevant, and turns those labels into an NDCG score per platform, so suggestion quality becomes a number.',
+         'Tags what each suggestion is really asking for — price, gender, age, brand, occasion, size, pack, and specs such as colour, storage or material — so gaps in the kind of suggestion offered show up, not just the count.',
+         'Maps every suggestion to a product vertical by retrieval plus an LLM check, which makes the comparison against competitors readable by category.',
+         'Runs single queries or a batch of a thousand, with caching and retries so a full run finishes without hand-holding.'],tools:['Python','Flask','LLM-assisted labelling','NDCG']},
+   {id:'instrumentation',cat:'Analytics',where:F,t:'Instrumentation and event validation',big:'~50%',cap:'of Shopsy 2.0 metrics verified end to end',
+    sum:'For the all-new Shopsy 2.0 app, made sure the numbers everyone relies on were being recorded correctly.',
+    pts:['Verified event tracking and data flow with Engineering.','Caught instrumentation bugs before they reached dashboards.','Reconciled discrepancies across data sources.'],
+    tools:['Clickstream','Plato','Statsig','Charles Proxy','Android Studio']},
+   {id:'metrics',cat:'Analytics',where:F,t:'North-star metrics and launch tracking',big:'L0/L1',cap:'north-star and input metrics, defined with Product and Business',
+    sum:'The metric definitions and the tracker used in weekly business reviews.',
+    pts:['Built the Shopsy 2.0 feed tracker on daily automated pipelines with data-quality checks.','Measured before-and-after launch shifts in orders per visit, average selling price and CTR.'],
+    tools:['SQL','Python','Looker Studio','Scheduled pipelines']},
+   {id:'forecasting',cat:'Data science',where:'Personal project · Nov 2026',t:'Demand forecasting and promotion optimisation',big:'6.8%',cap:'more accurate than a seasonal baseline (WAPE)',
+    sum:'A forecast, a price-response model and an optimiser that chooses which promotions to run.',
+    pts:['3.1M rows across 4,311 item-store series.','Price-response model validated out of sample.','Hit a +8% volume target at a 7.3% margin cost, against 24.3% for a blanket discount.'],
+    tools:['Python','Forecasting','Regression'],link:['View on GitHub','https://github.com/SethulakshmiSanthosh/grocery-pricing-optimizer']},
+   {id:'agent',cat:'Data science',where:'Personal project',t:'Search intelligence agent',big:'Agent',cap:'applied AI, built in my own time',
+    sum:'An agent for search analysis, built with the OpenAI Agents SDK.',pts:[],tools:['OpenAI Agents SDK','Python']},
+   {id:'personality',cat:'Research',where:'ICECA 2023 · IEEE',t:'Predicting Myers-Briggs personality from text',big:'1st',cap:'author of five',
+    sum:'A comparison of four classifiers for predicting personality type from forum posts.',
+    pts:['8,600+ sets of posts, with heavy class imbalance.','TF-IDF features, 5-fold cross-validation and grid search.','Logistic Regression and SGD performed best.'],
+    tools:['scikit-learn','NLTK','TF-IDF'],link:['Read the paper','https://doi.org/10.1109/iceca58529.2023.10394956']},
+   {id:'alzheimers',cat:'Research',where:'CODE-AI 2024 · CRC Press · co-author',t:'Alzheimer’s prediction from pangenome graphs',big:'0.87',cap:'ROC-AUC, as a proof of concept',
+    sum:'A Random Forest model on genetic variants from four genes associated with Alzheimer’s disease.',
+    pts:['Built pangenome graphs for APP, APOE, PSEN1 and PSEN2.','Extracted SNP, indel and copy-number features.'],tools:['Random Forest','scikit-learn','minimap2','seqwish']}
+  ];
+  var $=function(i){return document.getElementById(i)}, root=document.documentElement, rail=$('rail'), dlg=$('sheet'), cur=0, filter='All', shown=W;
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches, fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function pad(n){return (n<10?'0':'')+n}
+  function css(v){return getComputedStyle(root).getPropertyValue(v).trim()}
+
+  /* ---------- gallery ---------- */
+  var cats=['All'];W.forEach(function(w){if(cats.indexOf(w.cat)<0)cats.push(w.cat)});
+  cats.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-pressed',c==='All');
+    b.onclick=function(){filter=c;[].forEach.call($('filters').children,function(x){x.setAttribute('aria-pressed',x===b)});render();rail.scrollTo({left:0})};$('filters').appendChild(b)});
+  function render(){
+    shown=W.filter(function(w){return filter==='All'||w.cat===filter});
+    rail.innerHTML=shown.map(function(w,i){return '<button class="plate" type="button" data-i="'+i+'" data-cur="Open"><span class="top"><span class="label">'+esc(w.cat)+'</span></span>'+
+      '<span class="ghost">'+pad(i+1)+'</span><h3>'+esc(w.t)+'</h3><span class="open"><span>Open</span><span>↗</span></span></button>'}).join('');
+  }
+  var moved=0,down=false,sx=0,sl=0;
+  rail.addEventListener('pointerdown',function(e){if(e.pointerType==='touch')return;down=true;moved=0;sx=e.clientX;sl=rail.scrollLeft});
+  addEventListener('pointermove',function(e){if(!down)return;var d=e.clientX-sx;moved=Math.max(moved,Math.abs(d));if(moved>6){rail.classList.add('drag');rail.scrollLeft=sl-d}});
+  addEventListener('pointerup',function(){down=false;rail.classList.remove('drag')});
+  rail.addEventListener('click',function(e){if(moved>6){moved=0;return}var p=e.target.closest('.plate');if(p)open(+p.dataset.i)});
+  if(fine&&!still){rail.addEventListener('mousemove',function(e){var p=e.target.closest('.plate');if(!p)return;var r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      p.style.setProperty('--ry',((x-.5)*12)+'deg');p.style.setProperty('--rx',((.5-y)*10)+'deg');p.style.setProperty('--mx',x*100+'%');p.style.setProperty('--my',y*100+'%')});
+    rail.addEventListener('mouseout',function(e){var p=e.target.closest('.plate');if(p&&!p.contains(e.relatedTarget)){p.style.setProperty('--ry','0deg');p.style.setProperty('--rx','0deg')}})}
+  function step(d){rail.scrollBy({left:d*338,behavior:'smooth'})}
+  $('prev').onclick=function(){step(-1)};$('next').onclick=function(){step(1)};
+
+  function fill(i){cur=(i+shown.length)%shown.length;var w=shown[cur];
+    $('dCat').textContent=w.cat;$('dBig').textContent=w.big;$('dCap').textContent=w.cap;$('dNum').textContent=pad(cur+1)+' / '+pad(shown.length);
+    $('dWhere').textContent=w.where;$('dTitle').textContent=w.t;$('dSum').textContent=w.sum;
+    $('dPts').innerHTML=w.pts.map(function(p){return '<li>'+esc(p)+'</li>'}).join('');$('dPts').hidden=!w.pts.length;
+    $('dTools').innerHTML=w.tools.map(function(p){return '<span>'+esc(p)+'</span>'}).join('');
+    var l=$('dLink');l.hidden=!w.link;if(w.link){l.textContent=w.link[0]+' ↗';l.href=w.link[1]}
+    dlg.querySelector('.sheet').scrollTop=0}
+  function open(i){fill(i);if(!dlg.open){if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')}}
+  function close(){if(dlg.close)dlg.close();else dlg.removeAttribute('open')}
+  $('dPrev').onclick=function(){fill(cur-1)};$('dNext').onclick=function(){fill(cur+1)};$('dClose').onclick=close;
+  dlg.addEventListener('click',function(e){if(e.target===dlg)close()});
+  dlg.addEventListener('keydown',function(e){if(e.key==='ArrowRight')fill(cur+1);if(e.key==='ArrowLeft')fill(cur-1)});
+
+  /* ---------- hero field: dots that regroup per variant ---------- */
+  var cv=$('field'),cx=cv.getContext('2d'),hero=$('hero'),P=[],N=170,fw=0,fh=0,mode='a',mouse={x:-999,y:-999},live=true,colA,colB;
+  function gauss(){return (Math.random()+Math.random()+Math.random()+Math.random()-2)/1.15}
+  function homes(){
+    var bins={};
+    P.forEach(function(p,i){
+      if(mode==='a'){var x=Math.random();p.hx=fw*(.04+.92*x);p.hy=fh*(.86-.62*x)+gauss()*fh*.1;p.g=0}
+      else{p.g=i%2;var bx=Math.round((fw*(p.g?.62:.44)+gauss()*fw*.1)/11);bins[bx+'_'+p.g]=(bins[bx+'_'+p.g]||0)+1;p.hx=bx*11;p.hy=fh*.93-bins[bx+'_'+p.g]*9}
+    })}
+  function size(){var r=hero.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);fw=r.width;fh=r.height;cv.width=fw*d;cv.height=fh*d;cx.setTransform(d,0,0,d,0,0);homes();if(still)snap()}
+  function snap(){P.forEach(function(p){p.x=p.hx;p.y=p.hy});draw(0)}
+  function draw(t){
+    cx.clearRect(0,0,fw,fh);
+    if(mode==='a'){cx.strokeStyle=colA;cx.globalAlpha=.22;cx.lineWidth=1;cx.setLineDash([6,7]);cx.beginPath();cx.moveTo(fw*.04,fh*.86);cx.lineTo(fw*.96,fh*.24);cx.stroke();cx.setLineDash([])}
+    P.forEach(function(p,i){
+      if(!still){var dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;if(d2<19600){var f=(1-Math.sqrt(d2)/140)*2.4,d=Math.sqrt(d2)||1;p.vx+=dx/d*f;p.vy+=dy/d*f}
+        p.vx+=(p.hx+Math.sin(t/1400+i)*5-p.x)*.022;p.vy+=(p.hy+Math.cos(t/1700+i*1.7)*5-p.y)*.022;p.vx*=.86;p.vy*=.86;p.x+=p.vx;p.y+=p.vy}
+      cx.globalAlpha=mode==='a'?.25+.45*(i%5)/5:(p.g?.8:.38);cx.fillStyle=mode==='b'&&!p.g?'#EEEAE2':colA;
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.3);cx.fill()});
+    cx.globalAlpha=1}
+  function loop(t){if(live)draw(t);requestAnimationFrame(loop)}
+  for(var i=0;i<N;i++)P.push({x:Math.random()*1400,y:Math.random()*700,vx:0,vy:0,r:1.4+Math.random()*2.1,g:0});
+  hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+  hero.addEventListener('pointerleave',function(){mouse.x=mouse.y=-999});
+  addEventListener('resize',size);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){live=e[0].isIntersecting}).observe(hero);
+
+  /* ---------- portrait tilt ---------- */
+  var por=$('portrait');
+  if(fine&&!still)hero.addEventListener('mousemove',function(e){var r=por.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;
+    x=Math.max(-1.2,Math.min(1.2,x));y=Math.max(-1.2,Math.min(1.2,y));
+    por.style.setProperty('--ry',x*9+'deg');por.style.setProperty('--rx',-y*7+'deg');por.style.setProperty('--tx',x*-16+'px');por.style.setProperty('--ty',y*-12+'px')});
+
+  /* ---------- variant ---------- */
+  var A=$('varA'),B=$('varB'),h1=$('h1');
+  function set(v){mode=v;root.setAttribute('data-variant',v);A.setAttribute('aria-pressed',v==='a');B.setAttribute('aria-pressed',v==='b');
+    var parts=h1.getAttribute('data-'+v).split('|');
+    h1.innerHTML=parts[0].trim().split(' ').map(function(w){return '<span class="w">'+w+'</span>'}).join(' ')+' <em class="acc"><span class="w">'+parts[1]+'</span></em>';
+    document.querySelectorAll('p[data-a]').forEach(function(n){n.innerHTML=n.getAttribute('data-'+v)});
+    $('assign').textContent='Variant '+v.toUpperCase()+' · '+(v==='a'?'the analyst':'the person');
+    colA=css('--'+v);homes();if(still)snap();sim();
+    try{localStorage.setItem('variant',v)}catch(e){}}
+  A.onclick=function(){set('a')};B.onclick=function(){set('b')};
+
+  /* ---------- experiment simulator ---------- */
+  var nIn=$('n');
+  function phi(z){var t=1/(1+.2316419*z),d=.3989423*Math.exp(-z*z/2);return d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))))}
+  function sim(){
+    var n=Math.round(500*Math.pow(200,nIn.value/1000)/100)*100,p1=.1,p2=.108,se=Math.sqrt(p1*(1-p1)/n+p2*(1-p2)/n),z=.008/se;
+    var lo=(.008-1.96*se)/p1*100,hi=(.008+1.96*se)/p1*100,p=2*phi(z),ok=lo>0;
+    $('nOut').textContent=n.toLocaleString('en-IN');
+    $('ciOut').textContent=(lo>0?'+':'')+lo.toFixed(1)+'% to +'+hi.toFixed(1)+'%';
+    $('pOut').textContent=p<.001?'< 0.001':p.toFixed(3);
+    var X=function(v){return 10+500*(Math.max(-30,Math.min(46,v))+30)/76};
+    $('zero').setAttribute('x1',X(0));$('zero').setAttribute('x2',X(0));$('zeroT').setAttribute('x',X(0));
+    $('ciBar').setAttribute('x1',X(lo));$('ciBar').setAttribute('x2',X(hi));$('ciDot').setAttribute('cx',X(8));
+    $('ciBar').style.stroke=ok?'':css('--muted');
+    var v=$('verdict');v.textContent=ok?(p<.001?'Clear win. Ship it.':'Significant. Ship it.'):(lo>-4?'Close, but zero is still inside. Keep it running.':'Not yet. This could easily be noise.');
+    v.style.color=ok?css('--accent'):''}
+  nIn.addEventListener('input',sim);
+
+  /* ---------- small interactions ---------- */
+  var bar=$('bar');addEventListener('scroll',function(){var m=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(m>0?scrollY/m:0)+')'},{passive:true});
+  if(fine&&!still){
+    var c=$('cur'),tx=0,ty=0,px=0,py=0;c.classList.add('on');
+    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;var t=e.target.closest&&e.target.closest('[data-cur]');c.classList.toggle('big',!!t);c.textContent=t?t.getAttribute('data-cur'):''});
+    (function f(){px+=(tx-px)*.2;py+=(ty-py)*.2;c.style.transform='translate('+px+'px,'+py+'px)';requestAnimationFrame(f)})();
+    document.querySelectorAll('.mag').forEach(function(b){
+      b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.25+'px,'+(e.clientY-r.top-r.height/2)*.35+'px)'});
+      b.addEventListener('mouseleave',function(){b.style.transform=''})});
+  }
+  var skills=['SQL','Python','A/B testing','Funnels','Forecasting','Root-cause analysis','Spark SQL','BigQuery','scikit-learn','Statsig','Looker Studio','Cohorts','Regression','Clickstream'];
+  function mq(a){var h=a.map(function(s){return '<span>'+s+'</span>'}).join('');return h+h}
+  $('mq1').innerHTML=mq(skills);$('mq2').innerHTML=mq(skills.slice().reverse());
+
+  if('IntersectionObserver' in window&&!still){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);e.target.classList.add('in');
+      if(e.target.dataset.n){var b=e.target,n=+b.dataset.n,t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1100);k=1-Math.pow(1-k,3);b.textContent=b.dataset.pre+Math.round(n*k)+b.dataset.suf;if(k<1)requestAnimationFrame(f)})(t0)}})},{threshold:.15});
+    document.querySelectorAll('.rv,.fig b').forEach(function(n){io.observe(n)});
+  }else document.querySelectorAll('.rv').forEach(function(n){n.classList.add('in')});
+
+  var saved=null;try{saved=localStorage.getItem('variant')}catch(e){}
+  render();size();set(saved==='b'?'b':'a');if(!still)requestAnimationFrame(loop);
+  var h=location.hash.replace('#','');W.forEach(function(w,i){if(w.id===h)open(i)});
+
+  var cp=$('copy');cp.onclick=function(){var t=$('email').textContent;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){cp.textContent='Copied'},function(){
+      var r=document.createRange();r.selectNodeContents($('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Selected'})};
+})();
+</script>
+</body>
+</html>
